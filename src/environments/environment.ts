@@ -1,3 +1,3 @@
 export const environment = {
-  api: 'http://localhost:8020/api/v1'
+  api: 'https://backendburnoutcheck.onrender.com/api/v1'
 };
