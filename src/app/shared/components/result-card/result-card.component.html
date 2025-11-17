@@ -1,0 +1,51 @@
+<div class="result-card">
+
+  @if (hasResult()) {
+    <div class="result-card__container"
+         [class.result-card__container--positive]="isPositive()"
+         [class.result-card__container--negative]="!isPositive()">
+
+      <!-- Título -->
+      <h3 class="result-card__title">Último Resultado</h3>
+
+      <div class="result-card__content">
+        <!-- Badge grande (SÍ o NO) -->
+        <div class="result-card__badge-container">
+          <div class="result-card__badge"
+               [class.result-card__badge--positive]="isPositive()"
+               [class.result-card__badge--negative]="!isPositive()">
+            {{ statusBadge() }}
+          </div>
+        </div>
+
+        <!-- Info del resultado -->
+        <div class="result-card__info">
+          <!-- Indicador + estado -->
+          <div class="result-card__status">
+            <span class="result-card__indicator"
+                  [class.result-card__indicator--positive]="isPositive()"
+                  [class.result-card__indicator--negative]="!isPositive()">
+            </span>
+            <span class="result-card__status-text">{{ statusText() }}</span>
+          </div>
+
+          <!-- Descripción -->
+          <p class="result-card__description">
+            {{ descriptionText() }}
+          </p>
+
+          <!-- Fecha -->
+          <p class="result-card__date">
+            Realizado el {{ formattedDate() }}
+          </p>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <!-- Estado vacío -->
+    <div class="result-card__empty">
+      <p class="result-card__empty-text">No hay tests realizados</p>
+      <p class="result-card__empty-subtitle">Realiza tu primer test para conocer tu estado</p>
+    </div>
+  }
+</div>

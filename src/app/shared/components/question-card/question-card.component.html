@@ -1,0 +1,24 @@
+<div class="question-card">
+  <div class="question-card__container">
+
+    <!-- Título de la pregunta -->
+    <h2 class="question-card__title">{{ question.question_text }}</h2>
+
+    <!-- Subtítulo -->
+    <p class="question-card__subtitle">Seleccione una opción:</p>
+
+    <!-- Opciones -->
+    <div class="question-card__options">
+      @for (option of question.options; track option.id) {
+        <button
+          mat-raised-button
+          class="question-card__option"
+          [class.question-card__option--selected]="isSelected(option.option_value)"
+          (click)="selectAnswer(option.option_value)"
+        >
+          {{ option.option_text }}
+        </button>
+      }
+    </div>
+  </div>
+</div>

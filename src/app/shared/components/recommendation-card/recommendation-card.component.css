@@ -1,0 +1,130 @@
+.recommendation-card {
+  width: 100%;
+}
+
+/* ===== CONTAINER CON RECOMENDACIONES ===== */
+.recommendation-card__container {
+  background-color: var(--primary-light-orange);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+.recommendation-card__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-black);
+  text-align: center;
+  margin: 0 0 var(--spacing-xl) 0;
+  line-height: 1.3;
+}
+
+/* ===== LISTA DE RECOMENDACIONES ===== */
+.recommendation-card__list {
+  background-color: var(--bg-cream);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.recommendation-card__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) 0;
+}
+
+.recommendation-card__bullet {
+  color: var(--error-red);
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.recommendation-card__text {
+  font-size: var(--font-size-md);
+  color: var(--text-black);
+  line-height: 1.6;
+  margin: 0;
+  flex: 1;
+}
+
+/* ===== ESTADO VACÍO ===== */
+.recommendation-card__empty {
+  background-color: var(--bg-pastel-orange);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-xxl);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.recommendation-card__empty-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  color: var(--primary-dark-orange);
+}
+
+.recommendation-card__empty-text {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-black);
+  margin: 0;
+}
+
+.recommendation-card__empty-subtitle {
+  font-size: var(--font-size-md);
+  color: var(--text-brown);
+  margin: 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .recommendation-card__container {
+    padding: var(--spacing-lg);
+  }
+
+  .recommendation-card__title {
+    font-size: var(--font-size-lg);
+  }
+
+  .recommendation-card__list {
+    padding: var(--spacing-md);
+  }
+
+  .recommendation-card__text {
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .recommendation-card__container {
+    padding: var(--spacing-md);
+  }
+
+  .recommendation-card__title {
+    font-size: var(--font-size-md);
+  }
+
+  .recommendation-card__empty {
+    padding: var(--spacing-lg);
+  }
+
+  .recommendation-card__empty-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .recommendation-card__empty-text {
+    font-size: var(--font-size-lg);
+  }
+}

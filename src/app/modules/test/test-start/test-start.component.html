@@ -1,0 +1,92 @@
+<div class="test-start">
+  <div class="test-start__container">
+
+    <!-- Título -->
+    <h1 class="test-start__title">Iniciar Test de Burnout Académico</h1>
+    <p class="test-start__subtitle">
+      Por favor, completa la siguiente información antes de comenzar el test
+    </p>
+
+    <!-- Formulario -->
+    <form [formGroup]="testForm" (ngSubmit)="onSubmit()" class="test-start__form">
+
+      <!-- Ciclo -->
+      <div class="test-start__field">
+        <label class="test-start__label">¿En qué ciclo te encuentras?</label>
+        <mat-form-field appearance="outline" class="test-start__input">
+          <mat-select formControlName="ciclo" placeholder="Selecciona tu ciclo">
+            @for (ciclo of ciclos; track ciclo) {
+              <mat-option [value]="ciclo">Ciclo {{ ciclo }}</mat-option>
+            }
+          </mat-select>
+          @if (testForm.get('ciclo')?.invalid && testForm.get('ciclo')?.touched) {
+            <mat-error>{{ getErrorMessage('ciclo') }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <!-- Género -->
+      <div class="test-start__field">
+        <label class="test-start__label">¿Cuál es tu género?</label>
+        <mat-radio-group formControlName="genero" class="test-start__radio-group">
+          @for (genero of generos; track genero) {
+            <mat-radio-button [value]="genero" class="test-start__radio">
+              {{ genero }}
+            </mat-radio-button>
+          }
+        </mat-radio-group>
+        @if (testForm.get('genero')?.invalid && testForm.get('genero')?.touched) {
+          <div class="test-start__error">{{ getErrorMessage('genero') }}</div>
+        }
+      </div>
+
+      <!-- Facultad -->
+      <div class="test-start__field">
+        <label class="test-start__label">¿A qué facultad perteneces?</label>
+        <mat-form-field appearance="outline" class="test-start__input">
+          <mat-select formControlName="facultad" placeholder="Selecciona tu facultad">
+            @for (facultad of facultades; track facultad) {
+              <mat-option [value]="facultad">{{ facultad }}</mat-option>
+            }
+          </mat-select>
+          @if (testForm.get('facultad')?.invalid && testForm.get('facultad')?.touched) {
+            <mat-error>{{ getErrorMessage('facultad') }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <!-- Prácticas Preprofesionales -->
+      <div class="test-start__field">
+        <label class="test-start__label">¿Realizas prácticas preprofesionales?</label>
+        <mat-radio-group formControlName="practicasprepro" class="test-start__radio-group">
+          <mat-radio-button value="Sí" class="test-start__radio">Sí</mat-radio-button>
+          <mat-radio-button value="No" class="test-start__radio">No</mat-radio-button>
+        </mat-radio-group>
+        @if (testForm.get('practicasprepro')?.invalid && testForm.get('practicasprepro')?.touched) {
+          <div class="test-start__error">{{ getErrorMessage('practicasprepro') }}</div>
+        }
+      </div>
+
+      <!-- Mensaje de error -->
+      @if (errorMessage()) {
+        <div class="test-start__error-message">
+          <span>{{ errorMessage() }}</span>
+        </div>
+      }
+
+      <!-- Botón de inicio -->
+      <button
+        type="submit"
+        mat-raised-button
+        class="test-start__button"
+        [disabled]="isLoading()"
+      >
+        @if (isLoading()) {
+          <mat-spinner diameter="20"></mat-spinner>
+        } @else {
+          Comenzar Test
+        }
+      </button>
+    </form>
+  </div>
+</div>

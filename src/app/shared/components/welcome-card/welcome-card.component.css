@@ -1,0 +1,69 @@
+.welcome-card {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.welcome-card__avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: var(--border-radius-round);
+  background: linear-gradient(135deg, #4FC3F7 0%, #29B6F6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  flex-shrink: 0;
+}
+
+.welcome-card__initials {
+  font-size: 48px;
+  font-weight: var(--font-weight-bold);
+  color: var(--white);
+  text-transform: uppercase;
+}
+
+.welcome-card__message {
+  font-size: var(--font-size-xxxl);
+  font-weight: var(--font-weight-bold);
+  color: #003D5C;
+  margin: 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .welcome-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .welcome-card__avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .welcome-card__initials {
+    font-size: 40px;
+  }
+
+  .welcome-card__message {
+    font-size: var(--font-size-xxl);
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-card__avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .welcome-card__initials {
+    font-size: 32px;
+  }
+
+  .welcome-card__message {
+    font-size: var(--font-size-xl);
+  }
+}

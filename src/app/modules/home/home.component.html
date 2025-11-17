@@ -1,0 +1,37 @@
+<div class="home">
+
+  <!-- Welcome Card -->
+  <app-welcome-card [userName]="userName()"></app-welcome-card>
+
+  <!-- Loading State -->
+  @if (isLoading()) {
+    <div class="home__loading">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p class="home__loading-text">Cargando información...</p>
+    </div>
+  } @else {
+    <!-- Result Card -->
+    <app-result-card [result]="lastTestResult()"></app-result-card>
+
+    <!-- Action Buttons -->
+    <!-- <div class="home__actions">
+      <button
+        mat-raised-button
+        class="home__button home__button--primary"
+        (click)="navigateToTest()"
+      >
+        {{ hasTests() ? 'Realizar Nuevo Test' : 'Realizar Mi Primer Test' }}
+      </button>
+
+      @if (hasTests() && lastTestResult()) {
+        <button
+          mat-raised-button
+          class="home__button home__button--secondary"
+          (click)="viewAllResults()"
+        >
+          Ver Detalle del Resultado
+        </button>
+      }
+    </div> -->
+  }
+</div>

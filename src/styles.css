@@ -1,0 +1,111 @@
+/* You can add global styles to this file, and also import other style files */
+/* src/styles.css */
+
+:root {
+  /* ===== COLORES PRINCIPALES ===== */
+  --primary-orange: #f9a260;
+  --primary-dark-orange: #e48731;
+  --primary-light-orange: #fee5c2;
+
+  /* ===== COLORES DE FONDO ===== */
+  --bg-cream: #ffe7c3;
+  --bg-pastel-orange: #ebcbad;
+
+  /* ===== COLORES DE TEXTO ===== */
+  --text-black: #282828;
+  --text-brown: #56483a;
+
+  /* ===== COLORES DE ESTADO ===== */
+  --success-green: #5ffc18;
+  --error-red: #d83e0e;
+
+  /* ===== COLORES NEUTRALES ===== */
+  --gray-light: #b9beb8;
+  --white: #ffffff;
+  --soft-white: #eaeaea;
+
+  /* ===== ESPACIADOS ===== */
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
+  --spacing-xxl: 64px;
+
+  /* ===== TIPOGRAFÍA ===== */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 28px;
+  --font-size-xxl: 36px;
+  --font-size-xxxl: 48px;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* ===== BORDES ===== */
+  --border-radius-sm: 8px;
+  --border-radius-md: 16px;
+  --border-radius-lg: 24px;
+  --border-radius-xl: 32px;
+  --border-radius-round: 50%;
+
+  /* ===== SOMBRAS ===== */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.25);
+
+  /* ===== TRANSICIONES ===== */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 250ms ease-in-out;
+  --transition-slow: 350ms ease-in-out;
+}
+
+/* ===== RESET GLOBAL ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  font-size: var(--font-size-md);
+  color: var(--text-black);
+  background-color: var(--bg-cream);
+}
+
+/* ===== CLASES UTILITARIAS ===== */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-bold {
+  font-weight: var(--font-weight-bold);
+}
+
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+.mt-xl { margin-top: var(--spacing-xl); }
+
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+.mb-xl { margin-bottom: var(--spacing-xl); }
+
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+.p-xl { padding: var(--spacing-xl); }

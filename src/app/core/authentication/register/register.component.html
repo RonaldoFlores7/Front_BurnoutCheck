@@ -1,0 +1,114 @@
+<div class="register">
+  <!-- Header con logo -->
+  <div class="register__header">
+    <div class="register__logo">
+      <img src="assets/logo.png" alt="BurnoutCheck Logo" class="register__logo-image">
+    </div>
+    <div class="register__tagline">
+      <p>MENOS ESTRÉS, MÁS TRANQUILIDAD!</p>
+    </div>
+  </div>
+
+  <!-- Formulario de registro -->
+  <div class="register__container">
+    <div class="register__card">
+      <h2 class="register__title">Registrar Usuario</h2>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register__form">
+
+        <!-- Campo Username -->
+        <div class="register__field">
+          <mat-icon class="register__field-icon">person</mat-icon>
+          <div class="register__field-content">
+            <label class="register__label">USERNAME:</label>
+            <mat-form-field appearance="outline" class="register__input">
+              <input
+                matInput
+                type="text"
+                formControlName="username"
+                [disabled]="isLoading()"
+              >
+              @if (registerForm.get('username')?.invalid && registerForm.get('username')?.touched) {
+                <mat-error>{{ getErrorMessage('username') }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Campo Email -->
+        <div class="register__field">
+          <mat-icon class="register__field-icon">alternate_email</mat-icon>
+          <div class="register__field-content">
+            <label class="register__label">CORREO:</label>
+            <mat-form-field appearance="outline" class="register__input">
+              <input
+                matInput
+                type="email"
+                formControlName="email"
+                [disabled]="isLoading()"
+              >
+              @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+                <mat-error>{{ getErrorMessage('email') }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Campo Password -->
+        <div class="register__field">
+          <mat-icon class="register__field-icon">lock</mat-icon>
+          <div class="register__field-content">
+            <label class="register__label">PASSWORD:</label>
+            <mat-form-field appearance="outline" class="register__input">
+              <input
+                matInput
+                [type]="hidePassword() ? 'password' : 'text'"
+                formControlName="password"
+                [disabled]="isLoading()"
+              >
+              <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                (click)="togglePasswordVisibility()"
+                [disabled]="isLoading()"
+              >
+                <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+              @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+                <mat-error>{{ getErrorMessage('password') }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Mensaje de error -->
+        @if (errorMessage()) {
+          <div class="register__error">
+            <mat-icon>error</mat-icon>
+            <span>{{ errorMessage() }}</span>
+          </div>
+        }
+
+        <!-- Botón de registro -->
+        <button
+          type="submit"
+          mat-raised-button
+          class="register__button"
+          [disabled]="isLoading()"
+        >
+          @if (isLoading()) {
+            <mat-spinner diameter="20"></mat-spinner>
+          } @else {
+            Registrar
+          }
+        </button>
+      </form>
+    </div>
+
+    <!-- Link a login -->
+    <div class="register__login">
+      <p>Ya cuentas con una sesión? <a [routerLink]="['/login']" class="register__login-link">Iniciar Sesión</a></p>
+    </div>
+  </div>
+</div>

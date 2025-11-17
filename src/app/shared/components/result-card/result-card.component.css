@@ -1,0 +1,175 @@
+.result-card {
+  width: 100%;
+  margin-bottom: var(--spacing-lg);
+}
+
+/* ===== CONTAINER CON RESULTADO ===== */
+.result-card__container {
+  background-color: var(--primary-light-orange);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.result-card__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-black);
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+.result-card__content {
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: flex-start;
+  background-color: var(--bg-cream);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+}
+
+/* ===== BADGE GRANDE (SÍ / NO) ===== */
+.result-card__badge-container {
+  flex-shrink: 0;
+}
+
+.result-card__badge {
+  width: 120px;
+  height: 120px;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  font-weight: var(--font-weight-bold);
+  box-shadow: var(--shadow-md);
+}
+
+.result-card__badge--positive {
+  background-color: var(--white);
+  color: #003D5C;
+}
+
+.result-card__badge--negative {
+  background-color: var(--white);
+  color: #003D5C;
+}
+
+/* ===== INFO ===== */
+.result-card__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.result-card__status {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
+}
+
+.result-card__indicator {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--border-radius-round);
+  flex-shrink: 0;
+}
+
+.result-card__indicator--positive {
+  background-color: var(--error-red);
+}
+
+.result-card__indicator--negative {
+  background-color: var(--success-green);
+}
+
+.result-card__status-text {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-black);
+}
+
+.result-card__description {
+  font-size: var(--font-size-md);
+  color: var(--text-black);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.result-card__date {
+  font-size: var(--font-size-sm);
+  color: var(--text-brown);
+  text-align: right;
+  margin: var(--spacing-sm) 0 0 0;
+  font-weight: var(--font-weight-medium);
+}
+
+/* ===== ESTADO VACÍO ===== */
+.result-card__empty {
+  background-color: var(--bg-pastel-orange);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-xxl);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+.result-card__empty-text {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-black);
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.result-card__empty-subtitle {
+  font-size: var(--font-size-md);
+  color: var(--text-brown);
+  margin: 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .result-card__content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .result-card__badge {
+    width: 100px;
+    height: 100px;
+    font-size: 50px;
+  }
+
+  .result-card__status {
+    justify-content: center;
+  }
+
+  .result-card__date {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .result-card__container {
+    padding: var(--spacing-md);
+  }
+
+  .result-card__content {
+    padding: var(--spacing-md);
+  }
+
+  .result-card__badge {
+    width: 80px;
+    height: 80px;
+    font-size: 40px;
+  }
+
+  .result-card__title {
+    font-size: var(--font-size-lg);
+  }
+
+  .result-card__status-text {
+    font-size: var(--font-size-md);
+  }
+}

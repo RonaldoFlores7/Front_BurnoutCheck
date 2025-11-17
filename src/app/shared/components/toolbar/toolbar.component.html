@@ -1,0 +1,31 @@
+<div class="toolbar" [class.toolbar--public]="variant === 'public'" [class.toolbar--private]="variant === 'private'">
+
+  <!-- Header superior con logo y tagline -->
+  <div class="toolbar__header">
+    <!-- Logo -->
+    <div class="toolbar__logo">
+      <img src="assets/logo.png" alt="BurnoutCheck Logo" class="login__logo-image">
+    </div>
+
+    <!-- Tagline -->
+    <div class="toolbar__tagline">
+      <p>MENOS ESTRÉS, MÁS TRANQUILIDAD!</p>
+    </div>
+  </div>
+
+  <!-- Navbar de navegación (solo para variant='private') -->
+  @if (variant === 'private') {
+    <nav class="toolbar__nav">
+      @for (item of navItems; track item.route) {
+        <a
+          [routerLink]="item.route"
+          routerLinkActive="toolbar__nav-item--active"
+          class="toolbar__nav-item"
+        >
+          <mat-icon class="toolbar__nav-icon">{{ item.icon }}</mat-icon>
+          <span class="toolbar__nav-label">{{ item.label }}</span>
+        </a>
+      }
+    </nav>
+  }
+</div>

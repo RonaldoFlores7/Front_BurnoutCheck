@@ -1,0 +1,78 @@
+<div class="recommendations">
+
+  @if (isLoading()) {
+    <!-- Loading State -->
+    <div class="recommendations__loading">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p class="recommendations__loading-text">Cargando recomendaciones...</p>
+    </div>
+  } @else if (errorMessage()) {
+    <!-- Error State -->
+    <div class="recommendations__error">
+      <mat-icon class="recommendations__error-icon">error_outline</mat-icon>
+      <h2 class="recommendations__error-title">Error</h2>
+      <p class="recommendations__error-text">{{ errorMessage() }}</p>
+      <button
+        mat-raised-button
+        class="recommendations__button recommendations__button--secondary"
+        (click)="goToHome()"
+      >
+        Volver al Inicio
+      </button>
+    </div>
+  } @else {
+    <!-- Content -->
+    <div class="recommendations__container">
+
+      <!-- Header -->
+      <div class="recommendations__header">
+        <mat-icon class="recommendations__header-icon">lightbulb</mat-icon>
+        <h1 class="recommendations__header-title">Recomendaciones Personalizadas</h1>
+        <p class="recommendations__header-subtitle">
+          Basadas en tu último test de burnout académico
+        </p>
+      </div>
+
+      <!-- Recommendations Card -->
+      <app-recommendation-card [recommendations]="recommendations()"></app-recommendation-card>
+
+      <!-- Action Buttons -->
+      @if (recommendations().length > 0) {
+        <div class="recommendations__actions">
+          <button
+            mat-raised-button
+            class="recommendations__button recommendations__button--primary"
+            (click)="goToHome()"
+          >
+            <mat-icon>home</mat-icon>
+            Ir al Inicio
+          </button>
+
+          <!-- <button
+            mat-raised-button
+            class="recommendations__button recommendations__button--secondary"
+            (click)="goToTest()"
+          >
+            <mat-icon>refresh</mat-icon>
+            Realizar Nuevo Test
+          </button> -->
+        </div>
+      } @else {
+        <!-- Empty State Actions -->
+        <!-- <div class="recommendations__empty-actions">
+          <p class="recommendations__empty-text">
+            Realiza un test para recibir recomendaciones personalizadas según tu estado
+          </p>
+          <button
+            mat-raised-button
+            class="recommendations__button recommendations__button--primary"
+            (click)="goToTest()"
+          >
+            <mat-icon>assignment</mat-icon>
+            Realizar Test
+          </button>
+        </div> -->
+      }
+    </div>
+  }
+</div>

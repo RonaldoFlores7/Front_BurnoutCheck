@@ -1,0 +1,30 @@
+<div class="recommendation-card">
+
+  @if (recommendations.length > 0) {
+    <div class="recommendation-card__container">
+
+      <!-- Título -->
+      <h2 class="recommendation-card__title">
+        Recomendaciones para la prevención del Burnout Académico
+      </h2>
+
+      <!-- Lista de recomendaciones -->
+      <div class="recommendation-card__list">
+        @for (rec of recommendations; track rec.id) {
+          <div class="recommendation-card__item">
+            <mat-icon class="recommendation-card__bullet">fiber_manual_record</mat-icon>
+            <p class="recommendation-card__text">{{ rec.description }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  } @else {
+    <div class="recommendation-card__empty">
+      <mat-icon class="recommendation-card__empty-icon">info</mat-icon>
+      <p class="recommendation-card__empty-text">No hay recomendaciones disponibles</p>
+      <p class="recommendation-card__empty-subtitle">
+        Completa un test para recibir recomendaciones personalizadas
+      </p>
+    </div>
+  }
+</div>

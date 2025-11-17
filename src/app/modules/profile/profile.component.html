@@ -1,0 +1,113 @@
+<div class="profile">
+
+  @if (isLoading()) {
+    <!-- Loading State -->
+    <div class="profile__loading">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p class="profile__loading-text">Cargando perfil...</p>
+    </div>
+  } @else {
+    <div class="profile__container">
+
+      <!-- Título -->
+      <h1 class="profile__title">Tu Perfil</h1>
+
+      <!-- Avatar con iniciales -->
+      <div class="profile__avatar-container">
+        <div class="profile__avatar">
+          <span class="profile__initials">{{ initials() }}</span>
+          <button
+            mat-mini-fab
+            class="profile__avatar-edit"
+            (click)="toggleEditMode()"
+            [disabled]="isSaving()"
+          >
+            <mat-icon>{{ isEditMode() ? 'close' : 'add' }}</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <!-- Formulario -->
+      <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" class="profile__form">
+
+        <!-- Nombres y Apellidos -->
+        <div class="profile__field">
+          <label class="profile__label">Nombres y Apellidos</label>
+          <div class="profile__input-group">
+            <mat-form-field appearance="outline" class="profile__input profile__input--half">
+              <input
+                matInput
+                placeholder="Nombre"
+                formControlName="name"
+              >
+              @if (profileForm.get('name')?.invalid && profileForm.get('name')?.touched) {
+                <mat-error>{{ getErrorMessage('name') }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="profile__input profile__input--half">
+              <input
+                matInput
+                placeholder="Apellido"
+                formControlName="lastname"
+              >
+              @if (profileForm.get('lastname')?.invalid && profileForm.get('lastname')?.touched) {
+                <mat-error>{{ getErrorMessage('lastname') }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+
+        <!-- Número de celular -->
+        <div class="profile__field">
+          <label class="profile__label">Número de celular</label>
+          <mat-form-field appearance="outline" class="profile__input">
+            <input
+              matInput
+              type="tel"
+              placeholder="987654321"
+              formControlName="phone"
+            >
+            @if (profileForm.get('phone')?.invalid && profileForm.get('phone')?.touched) {
+              <mat-error>{{ getErrorMessage('phone') }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Correo electrónico (no editable) -->
+        <div class="profile__field">
+          <label class="profile__label">Correo electrónico</label>
+          <div class="profile__email">
+            {{ user()?.email }}
+          </div>
+        </div>
+
+        <!-- Botón Guardar (solo visible en modo edición) -->
+        @if (isEditMode()) {
+          <button
+            type="submit"
+            mat-raised-button
+            class="profile__button profile__button--save"
+            [disabled]="isSaving() || profileForm.invalid"
+          >
+            @if (isSaving()) {
+              <mat-spinner diameter="20"></mat-spinner>
+            } @else {
+              Guardar Cambios
+            }
+          </button>
+        }
+      </form>
+
+      <!-- Botón Cerrar Sesión -->
+      <button
+        mat-raised-button
+        class="profile__button profile__button--logout"
+        (click)="logout()"
+        [disabled]="isSaving()"
+      >
+        Cerrar Sesión
+      </button>
+    </div>
+  }
+</div>

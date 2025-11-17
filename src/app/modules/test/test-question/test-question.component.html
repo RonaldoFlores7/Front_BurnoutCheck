@@ -1,0 +1,79 @@
+<div class="test-question">
+
+  @if (isLoading()) {
+    <!-- Loading State -->
+    <div class="test-question__loading">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p class="test-question__loading-text">Cargando pregunta...</p>
+    </div>
+  } @else if (errorMessage()) {
+    <!-- Error State -->
+    <div class="test-question__error">
+      <h2>Error</h2>
+      <p>{{ errorMessage() }}</p>
+      <button mat-raised-button (click)="goBack()" class="test-question__button--secondary">
+        Volver
+      </button>
+    </div>
+  } @else if (currentQuestion()) {
+    <!-- Question Content -->
+    <div class="test-question__container">
+
+      <!-- Progress Bar -->
+      <div class="test-question__progress">
+        <div class="test-question__progress-info">
+          <span class="test-question__progress-text">
+            Pregunta {{ currentQuestionNumber() }} de {{ totalQuestions }}
+          </span>
+          <span class="test-question__progress-percentage">
+            {{ progress() | number:'1.0-0' }}%
+          </span>
+        </div>
+        <mat-progress-bar
+          mode="determinate"
+          [value]="progress()"
+          class="test-question__progress-bar">
+        </mat-progress-bar>
+      </div>
+
+      <!-- Question Card -->
+      <app-question-card
+        [question]="currentQuestion()!"
+        [questionNumber]="currentQuestionNumber()"
+        (answerSelected)="onAnswerSelected($event)">
+      </app-question-card>
+
+      <!-- Navigation Buttons -->
+      <div class="test-question__actions">
+        <button
+          mat-raised-button
+          class="test-question__button test-question__button--secondary"
+          (click)="goBack()"
+          [disabled]="isSaving()"
+        >
+          Anterior
+        </button>
+
+        <button
+          mat-raised-button
+          class="test-question__button test-question__button--primary"
+          (click)="continue()"
+          [disabled]="!canContinue()"
+        >
+          @if (isSaving()) {
+            <mat-spinner diameter="20"></mat-spinner>
+          } @else {
+            {{ isLastQuestion() ? 'Finalizar Test' : 'Siguiente' }}
+          }
+        </button>
+      </div>
+
+      <!-- Error message -->
+      @if (errorMessage() && !isLoading()) {
+        <div class="test-question__error-message">
+          {{ errorMessage() }}
+        </div>
+      }
+    </div>
+  }
+</div>

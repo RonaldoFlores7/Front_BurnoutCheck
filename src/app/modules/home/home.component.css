@@ -1,0 +1,98 @@
+.home {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+/* ===== LOADING STATE ===== */
+.home__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-xxl);
+  background-color: var(--bg-pastel-orange);
+  border-radius: var(--border-radius-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.home__loading-text {
+  font-size: var(--font-size-lg);
+  color: var(--text-brown);
+  margin: 0;
+  font-weight: var(--font-weight-medium);
+}
+
+/* ===== ACTION BUTTONS ===== */
+.home__actions {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+  margin-top: var(--spacing-xl);
+  flex-wrap: wrap;
+}
+
+.home__button {
+  font-size: var(--font-size-md) !important;
+  font-weight: var(--font-weight-bold) !important;
+  padding: var(--spacing-md) var(--spacing-xl) !important;
+  border-radius: var(--border-radius-lg) !important;
+  transition: var(--transition-normal) !important;
+  min-width: 200px;
+  height: 50px;
+}
+
+.home__button--primary {
+  background-color: var(--primary-dark-orange) !important;
+  color: var(--white) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+.home__button--primary:hover {
+  background-color: var(--primary-orange) !important;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.home__button--secondary {
+  background-color: var(--bg-pastel-orange) !important;
+  color: var(--text-black) !important;
+  border: 2px solid var(--primary-dark-orange) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.home__button--secondary:hover {
+  background-color: var(--primary-light-orange) !important;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .home {
+    padding: var(--spacing-md);
+  }
+
+  .home__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .home__button {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+@media (max-width: 480px) {
+  .home {
+    padding: var(--spacing-sm);
+  }
+
+  .home__button {
+    font-size: var(--font-size-sm) !important;
+    padding: var(--spacing-sm) var(--spacing-md) !important;
+    height: 45px;
+  }
+}

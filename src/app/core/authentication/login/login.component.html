@@ -1,0 +1,96 @@
+<div class="login">
+  <!-- Header con logo -->
+  <div class="login__header">
+    <div class="login__logo">
+      <img src="assets/logo.png" alt="BurnoutCheck Logo" class="login__logo-image">
+    </div>
+    <div class="login__tagline">
+      <p>MENOS ESTRÉS, MÁS TRANQUILIDAD!</p>
+    </div>
+  </div>
+
+  <!-- Formulario de login -->
+  <div class="login__container">
+    <div class="login__card">
+      <h2 class="login__title">Iniciar sesión</h2>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login__form">
+
+        <!-- Campo Username -->
+        <div class="login__field">
+          <mat-icon class="login__field-icon">person</mat-icon>
+          <mat-form-field appearance="outline" class="login__input">
+            <input
+              matInput
+              type="text"
+              placeholder="USERNAME"
+              formControlName="username"
+              [disabled]="isLoading()"
+            >
+            @if (loginForm.get('username')?.invalid && loginForm.get('username')?.touched) {
+              <mat-error>{{ getErrorMessage('username') }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Campo Password -->
+        <div class="login__field">
+          <mat-icon class="login__field-icon">lock</mat-icon>
+          <mat-form-field appearance="outline" class="login__input">
+            <input
+              matInput
+              [type]="hidePassword() ? 'password' : 'text'"
+              placeholder="PASSWORD"
+              formControlName="password"
+              [disabled]="isLoading()"
+            >
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              (click)="togglePasswordVisibility()"
+              [disabled]="isLoading()"
+            >
+              <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
+            @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
+              <mat-error>{{ getErrorMessage('password') }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <!-- Mensaje de error -->
+        @if (errorMessage()) {
+          <div class="login__error">
+            <mat-icon>error</mat-icon>
+            <span>{{ errorMessage() }}</span>
+          </div>
+        }
+
+        <!-- Botón de login -->
+        <button
+          type="submit"
+          mat-raised-button
+          class="login__button"
+          [disabled]="isLoading()"
+        >
+          @if (isLoading()) {
+            <mat-spinner diameter="20"></mat-spinner>
+          } @else {
+            LOGIN
+          }
+        </button>
+
+        <!-- Link Forgot Password -->
+        <!-- <div class="login__forgot">
+          <a href="#" class="login__forgot-link">Forgot password?</a>
+        </div> -->
+      </form>
+    </div>
+
+    <!-- Link a registro -->
+    <div class="login__register">
+      <p>¿Aún no cuentas con una sesión? <a [routerLink]="['/register']" class="login__register-link">Registro</a></p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,122 @@
+<div class="results-list">
+
+  @if (isLoading()) {
+    <!-- Loading State -->
+    <div class="results-list__loading">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p class="results-list__loading-text">Cargando historial de tests...</p>
+    </div>
+  } @else if (errorMessage()) {
+    <!-- Error State -->
+    <div class="results-list__error">
+      <mat-icon class="results-list__error-icon">error_outline</mat-icon>
+      <h2 class="results-list__error-title">Error</h2>
+      <p class="results-list__error-text">{{ errorMessage() }}</p>
+    </div>
+  } @else if (!hasTests()) {
+    <!-- Empty State -->
+    <div class="results-list__empty">
+      <mat-icon class="results-list__empty-icon">assignment</mat-icon>
+      <h2 class="results-list__empty-title">No hay tests realizados</h2>
+      <p class="results-list__empty-text">
+        Realiza tu primer test para ver tus resultados aquí
+      </p>
+      <button
+        mat-raised-button
+        class="results-list__button results-list__button--primary"
+        (click)="goToTest()"
+      >
+        <mat-icon>add</mat-icon>
+        Realizar Test
+      </button>
+    </div>
+  } @else {
+    <!-- Results Grid -->
+    <div class="results-list__container">
+
+      <!-- Header -->
+      <div class="results-list__header">
+        <h1 class="results-list__title">Historial de Tests</h1>
+        <p class="results-list__subtitle">
+          Todos tus tests de burnout académico realizados
+        </p>
+      </div>
+
+      <!-- Grid of Cards -->
+      <div class="results-list__grid">
+        @for (item of testsWithResults(); track item.test.id) {
+          <div class="results-list__card"
+               [class.results-list__card--latest]="item.isLatest"
+               (click)="viewTestDetail(item.test.id)">
+
+            <!-- Latest Badge -->
+            @if (item.isLatest) {
+              <div class="results-list__latest-badge">
+                <mat-icon>star</mat-icon>
+                <span>Más Reciente</span>
+              </div>
+            }
+
+            <!-- Card Header -->
+            <div class="results-list__card-header">
+              <div class="results-list__card-date">
+                <mat-icon>calendar_today</mat-icon>
+                <span>{{ getFormattedDate(item.test.completed_at || item.test.created_at) }}</span>
+              </div>
+            </div>
+
+            <!-- Result Badge -->
+            @if (item.result) {
+              <div class="results-list__card-result">
+                <div class="results-list__badge"
+                     [class.results-list__badge--positive]="isPositive(item.result.prediction)"
+                     [class.results-list__badge--negative]="!isPositive(item.result.prediction)">
+                  {{ getStatusBadge(item.result.prediction) }}
+                </div>
+
+                <!-- Status -->
+                <div class="results-list__status">
+                  <span class="results-list__indicator"
+                        [class.results-list__indicator--positive]="isPositive(item.result.prediction)"
+                        [class.results-list__indicator--negative]="!isPositive(item.result.prediction)">
+                  </span>
+                  <span class="results-list__status-text">
+                    {{ isPositive(item.result.prediction) ? 'Riesgo Significativo' : 'Sin Riesgo Detectado' }}
+                  </span>
+                </div>
+
+                <!-- Probability -->
+                <div class="results-list__probability">
+                  <span>Probabilidad: </span>
+                  <strong>{{ (item.result.probability * 100) | number:'1.0-0' }}%</strong>
+                </div>
+              </div>
+            } @else {
+              <div class="results-list__no-result">
+                <p>Sin resultado disponible</p>
+              </div>
+            }
+
+            <!-- View Button -->
+            <!-- <button mat-button class="results-list__view-button">
+              <span>Ver Detalle</span>
+              <mat-icon>arrow_forward</mat-icon>
+            </button> -->
+          </div>
+        }
+      </div>
+
+      <!-- Action Button -->
+      <!-- <div class="results-list__footer">
+        <button
+          mat-raised-button
+          class="results-list__button results-list__button--primary"
+          (click)="goToTest()"
+        >
+          <mat-icon>add</mat-icon>
+          Realizar Nuevo Test
+        </button>
+      </div> -->
+    </div>
+  }
+</div>

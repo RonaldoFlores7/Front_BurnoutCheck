@@ -1,0 +1,27 @@
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-cream);
+}
+
+.layout__content {
+  flex: 1;
+  padding: var(--spacing-xl) var(--spacing-md);
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .layout__content {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .layout__content {
+    padding: var(--spacing-md) var(--spacing-xs);
+  }
+}
