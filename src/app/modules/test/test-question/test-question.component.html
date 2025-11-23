@@ -40,6 +40,7 @@
       <app-question-card
         [question]="currentQuestion()!"
         [questionNumber]="currentQuestionNumber()"
+        [preSelectedAnswer]="selectedAnswer()"
         (answerSelected)="onAnswerSelected($event)">
       </app-question-card>
 

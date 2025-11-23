@@ -8,6 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { TestService } from '../../../core/services/test.service';
+import { QuestionService } from '../../../core/services/question.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-test-start',
@@ -27,6 +29,7 @@ import { TestService } from '../../../core/services/test.service';
 export class TestStartComponent {
   private readonly fb = inject(FormBuilder);
   private readonly testService = inject(TestService);
+  private readonly questionService = inject(QuestionService);
   private readonly router = inject(Router);
 
   testForm: FormGroup;
@@ -60,13 +63,19 @@ export class TestStartComponent {
       this.testForm.markAllAsTouched();
       return;
     }
-    console.log(this.testForm);
 
     this.isLoading.set(true);
     this.errorMessage.set('');
 
-    this.testService.startTest(this.testForm.value).subscribe({
-      next: (test) => {
+    // Iniciar test y cargar preguntas en paralelo
+    forkJoin({
+      test: this.testService.startTest(this.testForm.value),
+      questions: this.questionService.getActiveQuestions()
+    }).subscribe({
+      next: ({ test, questions }) => {
+
+        this.testService.clearCachedResponses(test.id);
+
         this.isLoading.set(false);
         // Navegar a la primera pregunta
         this.router.navigate(['/test/question', 1]);

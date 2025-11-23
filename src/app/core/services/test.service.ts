@@ -1,5 +1,3 @@
-// src/app/core/services/test.service.ts
-
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
@@ -22,6 +20,40 @@ export class TestService {
 
   currentTest = signal<Test | null>(null);
 
+  private getCacheKey(testId: number): string {
+    return `test_responses_${testId}`;
+  }
+
+  saveResponseToCache(testId: number, questionId: number, answer: string): void {
+    const cacheKey = this.getCacheKey(testId);
+    const cachedData = localStorage.getItem(cacheKey);
+    const responses = cachedData ? JSON.parse(cachedData) : {};
+
+    responses[questionId] = answer;
+    localStorage.setItem(cacheKey, JSON.stringify(responses));
+  }
+
+  getCachedResponses(testId: number): Record<number, string> {
+    const cacheKey = this.getCacheKey(testId);
+    const cachedData = localStorage.getItem(cacheKey);
+    return cachedData ? JSON.parse(cachedData) : {};
+  }
+
+  getCachedAnswer(testId: number, questionId: number): string | null {
+    const responses = this.getCachedResponses(testId);
+    return responses[questionId] || null;
+  }
+
+  clearCachedResponses(testId: number): void {
+    const cacheKey = this.getCacheKey(testId);
+    localStorage.removeItem(cacheKey);
+  }
+
+  getCachedResponsesCount(testId: number): number {
+    const responses = this.getCachedResponses(testId);
+    return Object.keys(responses).length;
+  }
+
   startTest(data: TestCreateRequest): Observable<Test> {
     return this.http.post<Test>(`${this.apiUrl}/start`, data).pipe(
       tap(test => {
@@ -39,7 +71,6 @@ export class TestService {
   }
 
   completeTest(testId: number): Observable<TestResult> {
-    console.log('Completing test:', testId);
     return this.http.post<TestResult>(`${this.apiUrl}/${testId}/complete`, {}).pipe(
       tap(() => {
         this.currentTest.set(null);
