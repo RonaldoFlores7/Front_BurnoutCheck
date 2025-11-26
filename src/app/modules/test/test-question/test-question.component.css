@@ -11,8 +11,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-md);
-  padding: var(--spacing-xxl);
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
   background-color: var(--bg-pastel-orange);
   border-radius: var(--border-radius-xl);
   box-shadow: var(--shadow-md);
@@ -57,7 +57,7 @@
 .test-question__container {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-sm);
 }
 
 /* ===== PROGRESS BAR ===== */
@@ -105,8 +105,8 @@
 .test-question__actions {
   display: flex;
   justify-content: space-between;
-  gap: var(--spacing-md);
-  margin-top: var(--spacing-md);
+  gap: var(--spacing-sm);
+  margin-top: 8px;
 }
 
 .test-question__button {
@@ -200,6 +200,10 @@
 
   .test-question__progress-percentage {
     font-size: var(--font-size-md);
+  }
+
+  .test-question__actions {
+    flex-direction: row;
   }
 
   .test-question__button {

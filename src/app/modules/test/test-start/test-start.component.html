@@ -46,7 +46,7 @@
         <mat-form-field appearance="outline" class="test-start__input">
           <mat-select formControlName="facultad" placeholder="Selecciona tu facultad">
             @for (facultad of facultades; track facultad) {
-              <mat-option [value]="facultad">{{ facultad }}</mat-option>
+              <mat-option [value]="facultad.value">{{ facultad.label }}</mat-option>
             }
           </mat-select>
           @if (testForm.get('facultad')?.invalid && testForm.get('facultad')?.touched) {
