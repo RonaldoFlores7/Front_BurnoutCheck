@@ -52,9 +52,9 @@ export class LoginComponent {
     this.errorMessage.set('');
 
     this.authService.login(this.loginForm.value).subscribe({
-      next: () => {
+      next: (user) => {
         this.isLoading.set(false);
-        this.router.navigate(['/home']);
+        this.router.navigate([user.role === 'admin' ? '/dashboard' : '/home']);
       },
       error: (error) => {
         this.isLoading.set(false);
